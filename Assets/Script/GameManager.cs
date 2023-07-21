@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour, IDataPresistent
     public Text raiText;
     private int rai;
 
+    public GameObject health;
+
     private HighScore highScore;
 
     public static GameManager Instance { get; private set; }
@@ -57,7 +59,7 @@ public class GameManager : MonoBehaviour, IDataPresistent
     }
     public void DecreaseGold()
     {
-        gold -= 30;
+        gold -= 10;
         goldText.text = gold.ToString();
     }
     public void DecreaseDrone()

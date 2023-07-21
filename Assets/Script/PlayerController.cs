@@ -144,8 +144,12 @@ public class PlayerController : MonoBehaviour, IDataPresistent
 
     public void OnShootButtonClicked()
     {
-        SoundManager.PlaySound("gunshot");
-        FireBullet();
+        if (canShoot)
+        {
+            SoundManager.PlaySound("gunshot");
+            FireBullet();
+        }
+        
     }
    /* public void StopAnimation()
     {

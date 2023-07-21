@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,14 +7,22 @@ using UnityEngine.UI;
 
 public class HealthUpButton : MonoBehaviour, IDataPresistent
 {
-    private int gold;
+    private Text goldText;
+    private int gold ;
     private int drone;
     public Text notifyText;
     public Image notifyImg;
 
+    private void Start()
+    {
+        goldText = GameManager.Instance.goldText;
+            //// If no game data, start a new game with initial values
+            //gold = 0; // Set your initial gold value here
+            //drone = 0; // Set your initial drone value here
+    }
     public void IncreaseHealth()
     {
-        if (gold < 30)
+        if (gold < 10)
         {
             notifyText.text = "Không đủ số vàng để nâng cấp";
             notifyImg.gameObject.SetActive(true);
@@ -21,12 +30,22 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
             DataPresistent.instance.LoadGame();
             return;
         }
-        GameManager.Instance.IncreaseDrone();
-        SceneManager.LoadScene("SampleScene");
+        else
+        {
+            gold -= 10;
+            drone++;
+            Debug.Log("Vang" + gold);
+            Debug.Log("Mau" + drone);
+            goldText.text = gold.ToString();
+            GameManager.Instance.droneText.text = drone.ToString();
+            GameManager.Instance.health.SetActive(false);
+            SceneManager.LoadScene("SampleScene");
+        }
+        
     }
     public void DecreaseGold()
     {
-        if (gold < 30)
+        if (gold < 10)
         {
             return;
         }
@@ -37,6 +56,7 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
     {
         DataPresistent.instance.SaveGame();
         DataPresistent.instance.LoadGame();
+        GameManager.Instance.health.SetActive(false);
         SceneManager.LoadSceneAsync("SampleScene");
     }
 
@@ -49,6 +69,7 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
     public void SaveData(ref GameData data)
     {
         data.gold = this.gold;
+        data.hp = this.drone;
     }
 
 }

@@ -579,7 +579,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282363829}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0935, y: 1.7, z: -3}
+  m_LocalPosition: {x: 0.0935, y: 0.78, z: -3}
   m_LocalScale: {x: 25.490698, y: 10.66667, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1180,7 +1180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &570748052
 Transform:
   m_ObjectHideFlags: 0
@@ -1211,10 +1211,11 @@ MonoBehaviour:
   objectPool: {fileID: 1861664913}
   playerTransform: {fileID: 5387241085468206085}
   minDistanceBetweenEnemies: 3
-  maxDistanceBetweenEnemies: 20
-  totalNumberOfEnemies: 10
+  maxDistanceBetweenEnemies: 10
+  totalNumberOfEnemies: 5
   yPosition: -0.38
   bossSpawnController: {fileID: 463891625}
+  bossPrefab: {fileID: 273406021386683082, guid: 20483ee0ab05ff044b8b758ffbc2d371, type: 3}
 --- !u!1 &577521137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,9 +1518,10 @@ MonoBehaviour:
   playerTransform: {fileID: 5387241085468206085}
   minDistanceBetweenEnemies: 5
   maxDistanceBetweenEnemies: 10
-  totalNumberOfEnemies: 3
+  totalNumberOfEnemies: 10
   yPosition: -3.02
   bossSpawnController: {fileID: 463891625}
+  bossPrefab: {fileID: 273406021386683082, guid: 20483ee0ab05ff044b8b758ffbc2d371, type: 3}
 --- !u!1 &807597094
 GameObject:
   m_ObjectHideFlags: 0
@@ -3041,6 +3043,7 @@ MonoBehaviour:
   goldText: {fileID: 547757655}
   droneText: {fileID: 673122179}
   raiText: {fileID: 567689686}
+  health: {fileID: 577521137}
 --- !u!1 &1610482619
 GameObject:
   m_ObjectHideFlags: 0
@@ -3592,7 +3595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1176091982860876424, guid: 867d969b2bbf0cd40ae509ab78fa6965, type: 3}
-  poolSize: 3
+  poolSize: 10
 --- !u!4 &1785113279
 Transform:
   m_ObjectHideFlags: 0
@@ -3756,7 +3759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 5095447209993032760, guid: 6496865c1dc537e4aa1f6f1d838e9ae6, type: 3}
-  poolSize: 10
+  poolSize: 5
 --- !u!4 &1861664914
 Transform:
   m_ObjectHideFlags: 0
@@ -4193,7 +4196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1996297630
 GameObject:
   m_ObjectHideFlags: 0

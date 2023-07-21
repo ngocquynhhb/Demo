@@ -40,8 +40,7 @@ public class BulletController : MonoBehaviour
              if (raiCount == 0)
             {
                 SpawnController spawnController = FindObjectOfType<SpawnController>();
-                if (spawnController != null)
-                {
+               
                     spawnController.SpawnBoss(); // Sinh ra quái BigRai khi bắn hết quái Rai
                     parallaxController.BossRaiAppeared(); // Gọi phương thức BossRaiAppeared() của ParallaxController
                    // playerController.StopAnimation(); // Gọi phương thức StopAnimation() của PlayerController
@@ -64,7 +63,6 @@ public class BulletController : MonoBehaviour
                     goldCoin.transform.position = goldCoinPosition;
 
                     FindObjectOfType<GameManager>().IncreaseGold();
-                }
             }
             else
             {
