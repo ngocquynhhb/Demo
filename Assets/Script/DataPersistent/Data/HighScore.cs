@@ -1,0 +1,14 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class HighScore
+{
+    public int highScore;
+
+    public HighScore()
+    {
+        this.highScore = 0;
+    }
+}
