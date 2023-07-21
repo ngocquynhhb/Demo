@@ -20,11 +20,14 @@ public class GameManager : MonoBehaviour, IDataPresistent
     public Text raiText;
     private int rai;
 
-    private HighScore highScore;
+    public Text HS;
+    private int hs;
+
+    private HighScore highScores;
 
     public static GameManager Instance { get; private set; }
 
-    private void Awake()
+    /*private void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -35,13 +38,14 @@ public class GameManager : MonoBehaviour, IDataPresistent
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-    }
+    }*/
 
     private void Start()
     {
         droneText.text = drone.ToString();
         goldText.text = gold.ToString(); 
         raiText.text = rai.ToString();
+        HS.text = hs.ToString();
         // Load high score từ lưu trữ
         LoadHighScore();
     }
@@ -64,15 +68,26 @@ public class GameManager : MonoBehaviour, IDataPresistent
     {
         drone--;
         droneText.text = drone.ToString();
+
+        // Check if the player's score exceeds the current high score
+        if (rai > hs)
+        {
+            // Update the high score value
+            hs = rai;
+
+            // Save the new high score
+            SaveHighScore();
+
+            // Update the high score text with the new high score value
+            HS.text = hs.ToString();
+        }
+
+        // Check if the player is out of drones
         if (drone <= 0)
         {
-            if (rai > highScore.highScore)
-            {
-                highScore.highScore = rai;
-                SaveHighScore();
-            }
             SceneManager.LoadScene("GameOver");
         }
+
     }
     public void IncreaseRai()
     {
@@ -85,6 +100,7 @@ public class GameManager : MonoBehaviour, IDataPresistent
         drone++;
         droneText.text = drone.ToString();
     }
+
     public void LoadData(GameData data)
     {
         this.gold = data.gold;
@@ -106,29 +122,47 @@ public class GameManager : MonoBehaviour, IDataPresistent
         {
             // Đọc tệp JSON và chuyển đổi thành đối tượng HighScore
             string json = File.ReadAllText(GetHighScoreFilePath());
-            highScore = JsonUtility.FromJson<HighScore>(json);
+            highScores = JsonUtility.FromJson<HighScore>(json);
+
+            // Update the hs variable with the loaded high score
+            hs = highScores.highScore;
+
+            // Update the high score text
+            HS.text = hs.ToString();
         }
         else
         {
             // Nếu không có tệp JSON, tạo một đối tượng HighScore mới với giá trị mặc định
-            highScore = new HighScore();
-            highScore.highScore = 0;
+            highScores = new HighScore();
+            highScores.highScore = 0;
+            hs = 0;
+
+            // Update the high score text with the default value
+            HS.text = hs.ToString();
         }
     }
 
     private void SaveHighScore()
     {
+        // Update the high score value in the highScore object
+        highScores.highScore = hs;
+
         // Chuyển đổi đối tượng HighScore thành chuỗi JSON
-        string json = JsonUtility.ToJson(highScore);
+        string json = JsonUtility.ToJson(highScores);
 
         // Lưu chuỗi JSON vào tệp
         File.WriteAllText(GetHighScoreFilePath(), json);
+
+        // Update the high score text
+        HS.text = hs.ToString();
     }
 
     private string GetHighScoreFilePath()
     {
+        
         // Đường dẫn tới tệp JSON lưu trữ high score
         return Application.persistentDataPath + "/highscore.json";
+
     }
 }
 

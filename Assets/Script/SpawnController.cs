@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnController : MonoBehaviour
+public class SpawnController : MonoBehaviour, IDataPresistent
 {
     public ObjectPooling objectPool;
     public Transform playerTransform; // Transform của player
@@ -11,12 +11,19 @@ public class SpawnController : MonoBehaviour
     public int totalNumberOfEnemies = 10; // Tổng số lượng quái cần spawn
     public float yPosition = -3.321175f;
     public SpawnBossController bossSpawnController;
+    SpawnController spawnController; // Assign this reference to the SpawnController
+    GameData gameData = DataPresistent.instance.gameData;
 
 
     private void Start()
     {
+        if(gameData.enemyPositions.Count != 0)
+        {
+            return;
+        }
         int remainingEnemies = totalNumberOfEnemies;
         float currentPosition = 0f;
+
         List<float> distances = GenerateRandomDistances(remainingEnemies, minDistanceBetweenEnemies, maxDistanceBetweenEnemies);
 
         while (remainingEnemies > 0)
@@ -42,6 +49,7 @@ public class SpawnController : MonoBehaviour
 
             remainingEnemies -= numberOfEnemies;
         }
+
     }
 
     private List<float> GenerateRandomDistances(int numberOfDistances, float minDistance, float maxDistance)
@@ -77,6 +85,42 @@ public class SpawnController : MonoBehaviour
         if (bossSpawnController != null)
         {
             bossSpawnController.SpawnBoss();
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        // Create a new GameData object if it doesn't exist
+        if (data == null)
+        {
+            data = new GameData();
+        }
+
+        // Clear the enemy position list in the GameData to store new data
+        data.enemyPositions.Clear();
+
+        // Iterate over all spawned enemies and store their positions in the GameData object
+        List<GameObject> spawnedEnemies = objectPool.GetSpawnedObjects();
+        foreach (GameObject enemy in spawnedEnemies)
+        {
+            data.enemyPositions.Add(enemy.transform.position);
+        }
+    }
+
+    public void LoadData(GameData data)
+    {
+        if (data == null)
+        {
+            return;
+        }
+        int totalEnemies = data.enemyPositions.Count;
+        for (int i = 0; i < totalEnemies; i++)
+        {
+            Vector3 enemyPosition = data.enemyPositions[i];
+
+            GameObject prefab = objectPool.GetPooledObject();
+            prefab.transform.position = enemyPosition;
+            prefab.SetActive(true);
         }
     }
 }
