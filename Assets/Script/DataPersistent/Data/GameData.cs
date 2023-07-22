@@ -13,11 +13,14 @@ public class GameData
 
     public Vector3 playerPosition;
 
+    public List<Vector3> enemyPositions;
+
     public GameData()
     {
         this.gold = 0;
         this.hp = 3;
         this.enemyScore = 0;
+        enemyPositions = new List<Vector3>();
         playerPosition = new Vector3(-7f, 1f, 0f);
     }
 }

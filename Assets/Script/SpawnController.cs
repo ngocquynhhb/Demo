@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
-public class SpawnController : MonoBehaviour
+public class SpawnController : MonoBehaviour, IDataPresistent
 {
     public ObjectPooling objectPool;
     public Transform playerTransform;
@@ -12,12 +13,16 @@ public class SpawnController : MonoBehaviour
     public float yPosition = -3.321175f;
     public SpawnBossController bossSpawnController;
     public GameObject bossPrefab;
-
+    GameData gameData = DataPresistent.instance.gameData;
     private EnemyFactory enemyFactory;
 
 
     private void Start()
     {
+        if (gameData.enemyPositions.Count != 0)
+        {
+            return;
+        }
         enemyFactory = new EnemyFactory(objectPool, bossPrefab);
 
         int remainingEnemies = totalNumberOfEnemies;
@@ -82,6 +87,42 @@ public class SpawnController : MonoBehaviour
         if (bossSpawnController != null)
         {
             bossSpawnController.SpawnBoss();
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        // Create a new GameData object if it doesn't exist
+        if (data == null)
+        {
+            data = new GameData();
+        }
+
+        // Clear the enemy position list in the GameData to store new data
+        data.enemyPositions.Clear();
+
+        // Iterate over all spawned enemies and store their positions in the GameData object
+        List<GameObject> spawnedEnemies = objectPool.GetSpawnedObjects();
+        foreach (GameObject enemy in spawnedEnemies)
+        {
+            data.enemyPositions.Add(enemy.transform.position);
+        }
+    }
+
+    public void LoadData(GameData data)
+    {
+        if (data == null)
+        {
+            return;
+        }
+        int totalEnemies = data.enemyPositions.Count;
+        for (int i = 0; i < totalEnemies; i++)
+        {
+            Vector3 enemyPosition = data.enemyPositions[i];
+
+            GameObject prefab = objectPool.GetPooledObject();
+            prefab.transform.position = enemyPosition;
+            prefab.SetActive(true);
         }
     }
 }
