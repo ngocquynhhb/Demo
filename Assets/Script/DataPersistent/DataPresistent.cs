@@ -65,7 +65,6 @@ public class DataPresistent : MonoBehaviour
     {
         this.gameData = dataHandler.Load();
 
-
         if (this.gameData == null && initializeDataIfNull)
         {
             NewGame();
@@ -89,7 +88,6 @@ public class DataPresistent : MonoBehaviour
 
         if (this.gameData == null)
         {
-            Debug.LogWarning("No data was found. A New Game needs to be started before data can be saved.");
             return;
         }
 
