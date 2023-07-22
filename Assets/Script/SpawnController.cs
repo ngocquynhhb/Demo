@@ -1,22 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class SpawnController : MonoBehaviour, IDataPresistent
 {
     public ObjectPooling objectPool;
-    public Transform playerTransform; // Transform của player
-    public float minDistanceBetweenEnemies = 3f; // Khoảng cách tối thiểu giữa các quái
-    public float maxDistanceBetweenEnemies = 10f; // Khoảng cách tối đa giữa các quái
-    public int totalNumberOfEnemies = 10; // Tổng số lượng quái cần spawn
+    public Transform playerTransform;
+    public float minDistanceBetweenEnemies = 3f;
+    public float maxDistanceBetweenEnemies = 10f;
+    public int totalNumberOfEnemies = 10;
     public float yPosition = -3.321175f;
     public SpawnBossController bossSpawnController;
+    public GameObject bossPrefab;
+    GameData gameData = DataPresistent.instance.gameData;
+    private EnemyFactory enemyFactory;
     SpawnController spawnController; // Assign this reference to the SpawnController
     GameData gameData = DataPresistent.instance.gameData;
 
 
     private void Start()
     {
+        if (gameData.enemyPositions.Count != 0)
+        {
+            return;
+        }
+        enemyFactory = new EnemyFactory(objectPool, bossPrefab);
+
         if(gameData.enemyPositions.Count != 0)
         {
             return;
@@ -38,14 +48,14 @@ public class SpawnController : MonoBehaviour, IDataPresistent
             for (int i = 0; i < numberOfEnemies; i++)
             {
                 Transform spawnPosition = spawnPositions[i];
+                GameObject enemy;
 
-                GameObject prefab = objectPool.GetPooledObject();
-                prefab.transform.position = spawnPosition.position;
-                prefab.SetActive(true);
+                enemy = enemyFactory.CreateNormalEnemy(spawnPosition.position);
 
                 // Cập nhật vị trí hiện tại cho quái tiếp theo
                 currentPosition += distance;
             }
+
 
             remainingEnemies -= numberOfEnemies;
         }

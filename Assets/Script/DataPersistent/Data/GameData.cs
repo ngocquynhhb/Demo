@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +13,7 @@ public class GameData
 
     public Vector3 playerPosition;
 
+    public List<Vector3> enemyPositions;
     public List<Vector3> enemyPositions = new List<Vector3>();
 
     public GameData()

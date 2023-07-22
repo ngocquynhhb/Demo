@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour, IDataPresistent
     public Text HS;
     private int hs;
 
+    public GameObject health;
     private HighScore highScores;
 
     public static GameManager Instance { get; private set; }
@@ -43,12 +44,13 @@ public class GameManager : MonoBehaviour, IDataPresistent
     private void Start()
     {
         droneText.text = drone.ToString();
-        goldText.text = gold.ToString(); 
+        goldText.text = gold.ToString();
         raiText.text = rai.ToString();
         HS.text = hs.ToString();
         // Load high score từ lưu trữ
         LoadHighScore();
     }
+
     public void IncreaseGold()
     {
         gold++;
@@ -61,7 +63,7 @@ public class GameManager : MonoBehaviour, IDataPresistent
     }
     public void DecreaseGold()
     {
-        gold -= 30;
+        gold -= 10;
         goldText.text = gold.ToString();
     }
     public void DecreaseDrone()
@@ -159,7 +161,6 @@ public class GameManager : MonoBehaviour, IDataPresistent
 
     private string GetHighScoreFilePath()
     {
-        
         // Đường dẫn tới tệp JSON lưu trữ high score
         return Application.persistentDataPath + "/highscore.json";
 
