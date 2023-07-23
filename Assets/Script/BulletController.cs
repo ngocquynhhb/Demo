@@ -6,12 +6,12 @@ public class BulletController : MonoBehaviour
 {
     public GameObject explosionPrefab;
     public GameObject goldCoinPrefab;
-    public float goldCoinSpeed = 5f;
+    public static float goldCoinSpeed = 5f;
     private int raiCount; // Số lượng quái Rai còn lại
     private ParallaxController parallaxController;
     private PlayerController playerController;
     private HealthUpButton healthUpButton;
-    public float goldCoinZ = -6f;
+    public static float goldCoinZ = -6f;
 
     private void OnBecameInvisible()
     {
@@ -29,6 +29,7 @@ public class BulletController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("upgradeCountttt" + HealthUpButton.upgradeCount + HealthUpButton.isUpgradeGold);
         if (collision.gameObject.CompareTag("Rai"))
         {
             FindObjectOfType<GameManager>().IncreaseRai();
@@ -62,25 +63,8 @@ public class BulletController : MonoBehaviour
                     Vector3 goldCoinPosition = goldCoin.transform.position;
                     goldCoinPosition.z = goldCoinZ;
                     goldCoin.transform.position = goldCoinPosition;
-                
-                int goldAmount = healthUpButton.upgradeCount;
-                Debug.Log("upgradeCount ttt" + goldAmount);
-                if (healthUpButton.isUpgradeGold || goldAmount > 0)
-                {
-                     goldAmount = 2 + healthUpButton.upgradeCount;
-                    Debug.Log("So vang" + goldAmount);
 
-                    if (goldAmount > 0)
-                    {
-                        FindObjectOfType<GameManager>().IncreaseGold(goldAmount);
-                        Debug.Log("So vang" + goldAmount);
-                    }
-                }
-                else
-                {
-                    FindObjectOfType<GameManager>().IncreaseGold();
-
-                }
+                HandleGoldUpgrade();
 
             }
             else
@@ -101,20 +85,8 @@ public class BulletController : MonoBehaviour
                 Vector3 goldCoinPosition = goldCoin.transform.position;
                 goldCoinPosition.z = goldCoinZ;
                 goldCoin.transform.position = goldCoinPosition;
-                int goldAmount = healthUpButton.upgradeCount;
-                if (healthUpButton.isUpgradeGold || goldAmount > 0)
-                {
-                    goldAmount = 2 + healthUpButton.upgradeCount;
 
-                    if (goldAmount > 0)
-                    {
-                        FindObjectOfType<GameManager>().IncreaseGold(goldAmount);
-                    }
-                }else
-                {
-                    FindObjectOfType<GameManager>().IncreaseGold();
-
-                }
+                HandleGoldUpgrade();
 
             }
         }else if (collision.gameObject.CompareTag("Drone"))
@@ -151,21 +123,7 @@ public class BulletController : MonoBehaviour
                 goldCoinPosition.z = goldCoinZ;
                 goldCoin.transform.position = goldCoinPosition;
 
-                int goldAmount = healthUpButton.upgradeCount;
-                if (healthUpButton.isUpgradeGold || goldAmount > 0)
-                {
-                    goldAmount = 3 + healthUpButton.upgradeCount;
-
-                    if (goldAmount > 0)
-                    {
-                        FindObjectOfType<GameManager>().IncreaseGold(goldAmount+1);
-                    }
-                }
-                else
-                {
-                    FindObjectOfType<GameManager>().IncreaseGold2();
-
-                }
+                HandleGoldUpgrade3();
             }
             else
             {
@@ -186,21 +144,7 @@ public class BulletController : MonoBehaviour
                 goldCoinPosition.z = goldCoinZ;
                 goldCoin.transform.position = goldCoinPosition;
 
-                int goldAmount = healthUpButton.upgradeCount;
-                if (healthUpButton.isUpgradeGold || goldAmount > 0)
-                {
-                    goldAmount = 3 + healthUpButton.upgradeCount;
-
-                    if (goldAmount > 0)
-                    {
-                        FindObjectOfType<GameManager>().IncreaseGold(goldAmount+1);
-                    }
-                }
-                else
-                {
-                    FindObjectOfType<GameManager>().IncreaseGold2();
-
-                }
+                HandleGoldUpgrade3();
 
             }
         }
@@ -220,5 +164,42 @@ public class BulletController : MonoBehaviour
         int droneCount = GameObject.FindGameObjectsWithTag("Drone").Length;
         raiCount += droneCount;
     }
+    private void HandleGoldUpgrade()
+    {
+        Debug.Log("upgradeCountttt" + HealthUpButton.upgradeCount + HealthUpButton.isUpgradeGold);
+        int goldAmount = HealthUpButton.upgradeCount;
+        if (HealthUpButton.isUpgradeGold || goldAmount > 0)
+        {
+            goldAmount = 1 + HealthUpButton.upgradeCount;
+            if (goldAmount > 0)
+            {
+                FindObjectOfType<GameManager>().IncreaseGold(goldAmount);
+            }
+        }
+        else
+        {
+            FindObjectOfType<GameManager>().IncreaseGold();
+        }
+    }
+   
+
+    private void HandleGoldUpgrade3()
+    {
+        int goldAmount = HealthUpButton.upgradeCount;
+        if (HealthUpButton.isUpgradeGold || goldAmount > 0)
+        {
+            goldAmount = 1 + HealthUpButton.upgradeCount;
+            if (goldAmount > 0)
+            {
+                FindObjectOfType<GameManager>().IncreaseGold(goldAmount+1);
+            }
+        }
+        else
+        {
+            FindObjectOfType<GameManager>().IncreaseGold2();
+        }
+    }
+  
+
 }
 

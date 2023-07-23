@@ -9,7 +9,7 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
 {
     private Text goldText;
     private Text droneText;
-    private int gold ;
+    private int gold;
     private int drone;
     public Text notifyText;
     public Image notifyImg;
@@ -47,12 +47,18 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
         }
 
 
-        
+
     }
-    public int upgradeCount = 0;
-    public bool isUpgradeGold = false;
+    public static int upgradeCount  {get; set;}
+    public static bool isUpgradeGold { get; set; }
+
+
+
+
     public void UpgradeGold()
     {
+        upgradeCount = 0;
+        isUpgradeGold = false;
         gold = int.Parse(goldText.text.ToString());
         if (gold < 30)
         {
@@ -68,12 +74,14 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
             upgradeCount++;
             isUpgradeGold = true;
             PauseOptions.Instance.SaveGame();
-            MenuStart.Instance.OnLoadGameClick();
+            //MenuStart.Instance.OnLoadGameClick();
             GameManager.Instance.health.SetActive(false);
             PauseOptions.Instance.FinishUpgradeGame();
         }
+        MenuStart.Instance.ReturnToGame();
         Debug.Log("upgradeCount" + upgradeCount + isUpgradeGold);
     }
+
 
     public void OnLoadGameClick()
     {

@@ -35,6 +35,7 @@ public class MenuStart : MonoBehaviour
         }
     }
 
+
     public void OnNewGameClick()
     {
         DisableMenuButtons();
@@ -44,10 +45,14 @@ public class MenuStart : MonoBehaviour
 
     }
 
-    public void OnLoadGameClick()
+    public void ReturnToGame()
     {
         DisableMenuButtons();
         SceneManager.LoadSceneAsync("SampleScene");
+    }
+    public void OnLoadGameClick()
+    {
+        ReturnToGame();
     }
 
     public void OnApplicationQuit()
