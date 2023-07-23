@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,18 +7,48 @@ public class PauseOptions : MonoBehaviour
 {
     public GameObject PauseScreen;
 
+    public GameObject UpgradeScreen;
+
+    public GameObject PopupScreen;
+
     bool GamePaused;
+
+    bool GameUpgrade;
+
+    bool GamePopup;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         GamePaused = false;
+
+        GameUpgrade = false;
+
+        GamePopup = false;
+
+    }
+
+    public static PauseOptions Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GamePaused)
+        if (GamePaused || GameUpgrade)
         {
             Time.timeScale = 0;
         }
@@ -38,6 +68,30 @@ public class PauseOptions : MonoBehaviour
     {
         GamePaused = false;
         PauseScreen.SetActive(false);
+    }
+
+    public void UpgradeGame()
+    {
+        GameUpgrade = true;
+        UpgradeScreen.SetActive(true);
+    }
+
+    public void FinishUpgradeGame()
+    {
+        GameUpgrade = false;
+        UpgradeScreen.SetActive(false);
+    }
+
+    public void PopUpGame()
+    {
+        GamePopup = true;
+        UpgradeScreen.SetActive(true);
+    }
+
+    public void FinishPopUpGame()
+    {
+        GamePopup = false;
+        UpgradeScreen.SetActive(false);
     }
 
     public void SaveGame()

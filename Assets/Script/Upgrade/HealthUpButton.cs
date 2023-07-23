@@ -12,22 +12,22 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
     private int drone;
     public Text notifyText;
     public Image notifyImg;
+    [SerializeField] private Button continueGameButton;
+
 
     private void Start()
     {
         goldText = GameManager.Instance.goldText;
-            //// If no game data, start a new game with initial values
-            //gold = 0; // Set your initial gold value here
-            //drone = 0; // Set your initial drone value here
     }
     public void IncreaseHealth()
     {
+
+        gold = int.Parse(goldText.text.ToString());
         if (gold < 10)
         {
             notifyText.text = "Không đủ số vàng để nâng cấp";
             notifyImg.gameObject.SetActive(true);
-            DataPresistent.instance.SaveGame();
-            DataPresistent.instance.LoadGame();
+            PauseOptions.Instance.SaveGame();
             return;
         }
         else
@@ -38,11 +38,20 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
             Debug.Log("Mau" + drone);
             goldText.text = gold.ToString();
             GameManager.Instance.droneText.text = drone.ToString();
+            PauseOptions.Instance.SaveGame();
+            MenuStart.Instance.OnLoadGameClick();
             GameManager.Instance.health.SetActive(false);
-            SceneManager.LoadScene("SampleScene");
+            PauseOptions.Instance.FinishUpgradeGame();
         }
+
+
         
     }
+    public void OnLoadGameClick()
+    {
+        DataPresistent.instance.LoadGame();
+    }
+    
     public void DecreaseGold()
     {
         if (gold < 10)
@@ -54,10 +63,10 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
 
     public void Exit()
     {
-        DataPresistent.instance.SaveGame();
-        DataPresistent.instance.LoadGame();
-        GameManager.Instance.health.SetActive(false);
-        SceneManager.LoadSceneAsync("SampleScene");
+        //GameManager.Instance.health.SetActive(false);
+       // PauseOptions.Instance.FinishUpgradeGame();
+        PauseOptions.Instance.SaveGame();
+        PauseOptions.Instance.PopUpGame();
     }
 
     public void LoadData(GameData data)

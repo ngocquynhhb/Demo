@@ -15,8 +15,6 @@ public class SpawnController : MonoBehaviour, IDataPresistent
     public GameObject bossPrefab;
     GameData gameData = DataPresistent.instance.gameData;
     private EnemyFactory enemyFactory;
-    SpawnController spawnController; // Assign this reference to the SpawnController
-    GameData gameData = DataPresistent.instance.gameData;
 
 
     private void Start()
@@ -27,13 +25,8 @@ public class SpawnController : MonoBehaviour, IDataPresistent
         }
         enemyFactory = new EnemyFactory(objectPool, bossPrefab);
 
-        if(gameData.enemyPositions.Count != 0)
-        {
-            return;
-        }
         int remainingEnemies = totalNumberOfEnemies;
         float currentPosition = 0f;
-
         List<float> distances = GenerateRandomDistances(remainingEnemies, minDistanceBetweenEnemies, maxDistanceBetweenEnemies);
 
         while (remainingEnemies > 0)
@@ -59,7 +52,6 @@ public class SpawnController : MonoBehaviour, IDataPresistent
 
             remainingEnemies -= numberOfEnemies;
         }
-
     }
 
     private List<float> GenerateRandomDistances(int numberOfDistances, float minDistance, float maxDistance)

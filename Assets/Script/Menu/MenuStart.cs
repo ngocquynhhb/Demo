@@ -11,6 +11,22 @@ public class MenuStart : MonoBehaviour
     [SerializeField] private Button continueGameButton;
     [SerializeField] private Button exitButton;
 
+
+    public static MenuStart Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
     private void Start()
     {
         if (!DataPresistent.instance.HasGameData())

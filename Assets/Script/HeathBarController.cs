@@ -11,6 +11,8 @@ public class HeathBarController : MonoBehaviour
     private float health; // Sức mạnh hiện tại
     private int enemyCount; // Số lượng quái
 
+
+
     private void Start()
     {
         health = maxHealth;
@@ -30,7 +32,9 @@ public class HeathBarController : MonoBehaviour
         {
             GameManager.Instance.IncreaseGold5();
             DataPresistent.instance.SaveGame();
-            SceneManager.LoadScene("Upgrade");
+            PauseOptions.Instance.UpgradeGame();
+            GameManager.Instance.health.SetActive(false);
+            //SceneManager.LoadScene("Upgrade");
         }
     }
 

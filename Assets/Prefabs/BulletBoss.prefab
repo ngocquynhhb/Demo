@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3146849709479837898}
   - component: {fileID: 5338105090300813693}
   - component: {fileID: -3326209790542249833}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BulletBoss
   m_TagString: bossbullet
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7425595468528286811}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
