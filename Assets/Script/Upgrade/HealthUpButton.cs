@@ -14,10 +14,11 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
     public Text notifyText;
     public Image notifyImg;
     [SerializeField] private Button continueGameButton;
-
+    public Text napdan;
 
     private void Start()
     {
+        napdan.text = "";
         goldText = GameManager.Instance.goldText;
     }
     public void IncreaseHealth()
@@ -48,6 +49,32 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
 
         
     }
+    public int upgradeCount = 0;
+    public bool isUpgradeGold = false;
+    public void UpgradeGold()
+    {
+        gold = int.Parse(goldText.text.ToString());
+        if (gold < 15)
+        {
+            notifyText.text = "Không đủ số vàng để nâng cấp";
+            notifyImg.gameObject.SetActive(true);
+            PauseOptions.Instance.SaveGame();
+            return;
+        }
+        else
+        {
+            gold -= 15;
+            goldText.text = gold.ToString();
+            upgradeCount++;
+            isUpgradeGold = true;
+            PauseOptions.Instance.SaveGame();
+            MenuStart.Instance.OnLoadGameClick();
+            GameManager.Instance.health.SetActive(false);
+            PauseOptions.Instance.FinishUpgradeGame();
+        }
+        Debug.Log("upgradeCount" + upgradeCount + isUpgradeGold);
+    }
+
     public void OnLoadGameClick()
     {
         DataPresistent.instance.LoadGame();

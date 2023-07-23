@@ -8,4 +8,5 @@ public class BulletBossController : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
 }
