@@ -9,13 +9,11 @@ public class PauseOptions : MonoBehaviour
 
     public GameObject UpgradeScreen;
 
-    public GameObject PopupScreen;
 
     bool GamePaused;
 
     bool GameUpgrade;
 
-    bool GamePopup;
 
 
 
@@ -26,7 +24,6 @@ public class PauseOptions : MonoBehaviour
 
         GameUpgrade = false;
 
-        GamePopup = false;
 
     }
 
@@ -82,17 +79,6 @@ public class PauseOptions : MonoBehaviour
         UpgradeScreen.SetActive(false);
     }
 
-    public void PopUpGame()
-    {
-        GamePopup = true;
-        UpgradeScreen.SetActive(true);
-    }
-
-    public void FinishPopUpGame()
-    {
-        GamePopup = false;
-        UpgradeScreen.SetActive(false);
-    }
 
     public void SaveGame()
     {

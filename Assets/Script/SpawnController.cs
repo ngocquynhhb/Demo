@@ -75,7 +75,7 @@ public class SpawnController : MonoBehaviour, IDataPresistent
         {
             // Tạo một GameObject tạm để lưu trữ vị trí spawn
             GameObject spawnPositionObject = new GameObject("SpawnPosition");
-            spawnPositionObject.transform.position = new Vector3(startPosition + i * distance, yPosition, 0f);
+            spawnPositionObject.transform.position = new Vector3((startPosition + i * distance) + 12, yPosition, 0f);
             spawnPositions.Add(spawnPositionObject.transform);
         }
 

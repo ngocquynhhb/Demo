@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class HealthUpButton : MonoBehaviour, IDataPresistent
 {
     private Text goldText;
+    private Text droneText;
     private int gold ;
     private int drone;
     public Text notifyText;
@@ -63,11 +64,12 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
 
     public void Exit()
     {
-        //GameManager.Instance.health.SetActive(false);
-       // PauseOptions.Instance.FinishUpgradeGame();
+        gold = int.Parse(goldText.text.ToString());
+        GameManager.Instance.health.SetActive(false);
         PauseOptions.Instance.SaveGame();
-        PauseOptions.Instance.PopUpGame();
+        MenuStart.Instance.OnLoadGameClick();
     }
+
 
     public void LoadData(GameData data)
     {

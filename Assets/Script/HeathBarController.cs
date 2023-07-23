@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class HeathBarController : MonoBehaviour
+public class HeathBarController : MonoBehaviour, IDataPresistent
 {
     public Image foreground; // Hình ảnh foreground
     public float maxHealth = 5f; // Sức mạnh tối đa
@@ -31,7 +31,7 @@ public class HeathBarController : MonoBehaviour
         if (health == 0)
         {
             GameManager.Instance.IncreaseGold5();
-            DataPresistent.instance.SaveGame();
+            PauseOptions.Instance.SaveGame();
             PauseOptions.Instance.UpgradeGame();
             GameManager.Instance.health.SetActive(false);
             //SceneManager.LoadScene("Upgrade");
@@ -61,4 +61,13 @@ public class HeathBarController : MonoBehaviour
         enemyCount--;
     }
 
+    public void LoadData(GameData data)
+    {
+       GameManager.Instance.LoadData(data);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        GameManager.Instance.SaveData(ref data);
+    }
 }
