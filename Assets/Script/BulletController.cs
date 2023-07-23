@@ -22,7 +22,6 @@ public class BulletController : MonoBehaviour
     {
         raiCount = GameObject.FindGameObjectsWithTag("Rai").Length; // Khởi tạo số lượng quái Rai
         Debug.Log(raiCount);
-
         parallaxController = FindObjectOfType<ParallaxController>(); // Tìm và lưu trữ tham chiếu đến ParallaxController
         playerController = FindObjectOfType<PlayerController>(); // Tìm và lưu trữ tham chiếu đến PlayerController
         healthUpButton = FindObjectOfType<HealthUpButton>();
@@ -63,10 +62,12 @@ public class BulletController : MonoBehaviour
                     Vector3 goldCoinPosition = goldCoin.transform.position;
                     goldCoinPosition.z = goldCoinZ;
                     goldCoin.transform.position = goldCoinPosition;
-                Debug.Log("So vang" + healthUpButton.isUpgradeGold);
-                if (healthUpButton.isUpgradeGold)
+                
+                int goldAmount = healthUpButton.upgradeCount;
+                Debug.Log("upgradeCount ttt" + goldAmount);
+                if (healthUpButton.isUpgradeGold || goldAmount > 0)
                 {
-                    int goldAmount = 2 + healthUpButton.upgradeCount;
+                     goldAmount = 2 + healthUpButton.upgradeCount;
                     Debug.Log("So vang" + goldAmount);
 
                     if (goldAmount > 0)
@@ -100,10 +101,10 @@ public class BulletController : MonoBehaviour
                 Vector3 goldCoinPosition = goldCoin.transform.position;
                 goldCoinPosition.z = goldCoinZ;
                 goldCoin.transform.position = goldCoinPosition;
-                if (healthUpButton.isUpgradeGold)
+                int goldAmount = healthUpButton.upgradeCount;
+                if (healthUpButton.isUpgradeGold || goldAmount > 0)
                 {
-                    int goldAmount = 2 + healthUpButton.upgradeCount;
-                   
+                    goldAmount = 2 + healthUpButton.upgradeCount;
 
                     if (goldAmount > 0)
                     {
@@ -150,10 +151,10 @@ public class BulletController : MonoBehaviour
                 goldCoinPosition.z = goldCoinZ;
                 goldCoin.transform.position = goldCoinPosition;
 
-                if (healthUpButton.isUpgradeGold)
+                int goldAmount = healthUpButton.upgradeCount;
+                if (healthUpButton.isUpgradeGold || goldAmount > 0)
                 {
-
-                    int goldAmount = 3 + healthUpButton.upgradeCount;
+                    goldAmount = 3 + healthUpButton.upgradeCount;
 
                     if (goldAmount > 0)
                     {
@@ -185,9 +186,10 @@ public class BulletController : MonoBehaviour
                 goldCoinPosition.z = goldCoinZ;
                 goldCoin.transform.position = goldCoinPosition;
 
-                if (healthUpButton.isUpgradeGold)
+                int goldAmount = healthUpButton.upgradeCount;
+                if (healthUpButton.isUpgradeGold || goldAmount > 0)
                 {
-                    int goldAmount = 3 + healthUpButton.upgradeCount;
+                    goldAmount = 3 + healthUpButton.upgradeCount;
 
                     if (goldAmount > 0)
                     {
