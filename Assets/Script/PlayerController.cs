@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour, IDataPresistent
 {
     public float jumpForce = 10f;
     public Rigidbody2D rb;
     private bool isJumping = false;
+    public Text napdan;
 
     public BulletPooling bulletPool;
 
@@ -27,12 +29,14 @@ public class PlayerController : MonoBehaviour, IDataPresistent
 
     void Start()
     {
+       
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
     void FireBullet()
     {
+        
         if (isReloading || !canShoot)
             return;
 
@@ -115,7 +119,8 @@ public class PlayerController : MonoBehaviour, IDataPresistent
         {
             isJumping = false;
         }
-        if (collision.gameObject.CompareTag("Rai") || collision.gameObject.CompareTag("BigRai"))
+        if (collision.gameObject.CompareTag("Rai") || collision.gameObject.CompareTag("BigRai") 
+            || collision.gameObject.CompareTag("bossbullet") || collision.gameObject.CompareTag("Drone"))
         {
             collision.gameObject.SetActive(false);
             flashEffect.Flash();
@@ -144,12 +149,19 @@ public class PlayerController : MonoBehaviour, IDataPresistent
 
     public void OnShootButtonClicked()
     {
+
         if (canShoot)
         {
+            napdan.text = "";
+
             SoundManager.PlaySound("gunshot");
             FireBullet();
         }
-        
+        else
+        {
+            napdan.text = "Đang nạp đạn";
+        }
+
     }
    /* public void StopAnimation()
     {

@@ -16,6 +16,7 @@ TagManager:
   - Jump
   - GoldCoin
   - bossbullet
+  - Drone
   layers:
   - Default
   - TransparentFX
