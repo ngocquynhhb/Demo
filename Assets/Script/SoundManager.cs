@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour
     {
         gunshot = Resources.Load<AudioClip>("GunShot");
         jumping = Resources.Load<AudioClip>("Jumping");
+        jumping = Resources.Load<AudioClip>("Jumping1");
         enemydie = Resources.Load<AudioClip>("EnemyDie");
         helicopter = Resources.Load<AudioClip>("Helicopter");
         rbrunning = Resources.Load<AudioClip>("RobotRunning");
@@ -26,6 +27,9 @@ public class SoundManager : MonoBehaviour
                 audioSource.PlayOneShot(gunshot);
                 break;
             case "jumping":
+                audioSource.PlayOneShot(jumping);
+                break;
+            case "jumping1":
                 audioSource.PlayOneShot(jumping);
                 break;
             case "enemydie":

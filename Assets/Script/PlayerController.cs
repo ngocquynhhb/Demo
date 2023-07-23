@@ -143,6 +143,7 @@ public class PlayerController : MonoBehaviour, IDataPresistent
         if (!isJumping)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            SoundManager.PlaySound("jumping1");
             isJumping = true;
         }
     }

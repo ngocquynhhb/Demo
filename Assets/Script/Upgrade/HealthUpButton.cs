@@ -25,7 +25,7 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
     {
 
         gold = int.Parse(goldText.text.ToString());
-        if (gold < 10)
+        if (gold < 25)
         {
             notifyText.text = "Không đủ số vàng để nâng cấp";
             notifyImg.gameObject.SetActive(true);
@@ -34,7 +34,7 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
         }
         else
         {
-            gold -= 10;
+            gold -= 25;
             drone++;
             Debug.Log("Vang" + gold);
             Debug.Log("Mau" + drone);
@@ -54,7 +54,7 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
     public void UpgradeGold()
     {
         gold = int.Parse(goldText.text.ToString());
-        if (gold < 15)
+        if (gold < 30)
         {
             notifyText.text = "Không đủ số vàng để nâng cấp";
             notifyImg.gameObject.SetActive(true);
@@ -82,7 +82,7 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
     
     public void DecreaseGold()
     {
-        if (gold < 10)
+        if (gold < 25)
         {
             return;
         }

@@ -484,6 +484,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7425595468528286811, guid: 34bc08f49a023974c95e69c12a44129c, type: 3}
   targetX: -7.27
-  targetY: -3.91
-  bulletSpeed: 10
-  fireInterval: 3
+  targetY: -3.5
+  bulletSpeed: 20
+  fireInterval: 2
