@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour, IDataPresistent
 
     public BulletPooling bulletPool;
 
-    public float bulletForce = 10f;
+    public float bulletForce = 15f;
 
     public GameObject bulletPosition;
 

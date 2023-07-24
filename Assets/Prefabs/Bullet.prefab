@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2178820652092820330
 Animator:
@@ -99,7 +99,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 1370307346, guid: badf281f445dcb040b12bba3afac4540, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.9851217, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -123,8 +123,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 5166634229659901394, guid: e9cee7ccba91ef04fbbc8633173c35a1, type: 3}
   goldCoinPrefab: {fileID: 5491661971531929510, guid: ef313c707418b1b44bd510ed4edf81f0, type: 3}
-  goldCoinSpeed: 5
-  goldCoinZ: -6
 --- !u!50 &4072349247998931186
 Rigidbody2D:
   serializedVersion: 4

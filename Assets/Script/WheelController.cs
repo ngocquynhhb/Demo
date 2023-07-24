@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WheelController : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 7f;
     private float leftEdge;
 
     private void Start()

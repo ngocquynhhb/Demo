@@ -69,7 +69,7 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
         }
         else
         {
-            gold -= 15;
+            gold -= 30;
             goldText.text = gold.ToString();
             upgradeCount++;
             isUpgradeGold = true;

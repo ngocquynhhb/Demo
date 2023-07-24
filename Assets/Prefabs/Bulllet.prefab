@@ -163,5 +163,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 5166634229659901394, guid: e9cee7ccba91ef04fbbc8633173c35a1, type: 3}
   goldCoinPrefab: {fileID: 5491661971531929510, guid: ef313c707418b1b44bd510ed4edf81f0, type: 3}
-  goldCoinSpeed: 5
-  goldCoinZ: -6
