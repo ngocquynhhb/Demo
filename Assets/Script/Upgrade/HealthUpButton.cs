@@ -20,11 +20,13 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
     {
         napdan.text = "";
         goldText = GameManager.Instance.goldText;
+        droneText = GameManager.Instance.droneText;
     }
     public void IncreaseHealth()
     {
 
         gold = int.Parse(goldText.text.ToString());
+        drone = int.Parse(droneText.text.ToString());
         if (gold < 25)
         {
             notifyText.text = "Không đủ số vàng để nâng cấp";
@@ -45,9 +47,6 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
             GameManager.Instance.health.SetActive(false);
             PauseOptions.Instance.FinishUpgradeGame();
         }
-
-
-
     }
     public static int upgradeCount  {get; set;}
     public static bool isUpgradeGold { get; set; }
@@ -60,6 +59,7 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
         upgradeCount = 0;
         isUpgradeGold = false;
         gold = int.Parse(goldText.text.ToString());
+        drone = int.Parse(droneText.text.ToString());
         if (gold < 30)
         {
             notifyText.text = "Không đủ số vàng để nâng cấp";
@@ -99,7 +99,9 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
 
     public void Exit()
     {
+
         gold = int.Parse(goldText.text.ToString());
+        drone = int.Parse(droneText.text.ToString());
         GameManager.Instance.health.SetActive(false);
         PauseOptions.Instance.SaveGame();
         MenuStart.Instance.OnLoadGameClick();
