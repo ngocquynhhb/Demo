@@ -57,8 +57,8 @@ public class HealthUpButton : MonoBehaviour, IDataPresistent
 
     public void UpgradeGold()
     {
-        upgradeCount = 0;
-        isUpgradeGold = false;
+        upgradeCount = PlayerPrefs.GetInt("UpgradeCount", 0);
+        isUpgradeGold = PlayerPrefs.GetInt("IsUpgradeGold", 0) == 1;
         gold = int.Parse(goldText.text.ToString());
         if (gold < 15)
         {
